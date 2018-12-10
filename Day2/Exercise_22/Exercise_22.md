@@ -20,7 +20,7 @@ In this exercise, you’ll learn how
 
 ## Goal
 
-The goal of this exercise is to create a Communication System along with a Communication User and to setup a Communication Arrangement for the Business Partners collection.
+The goal of this exercise is to create a Communication System along with a Communication User and to setup a Communication Arrangement for the Product Master collection.
 
 
 ## Prerequisites
@@ -54,7 +54,7 @@ In the upcoming exercises you will learn how to retrieve and work with data usin
 1. Click on **New** to create a new communication system  
 	![](images/04.png)
 
-1. Enter **BP\_EXT\_SYSTEM\_\<LOC\>\_XX** for both the System ID and the System Name, replacing **\<LOC\>** with the location's acronym where you are attending the workshop (i.e. WDF for Walldorf) and **XX** with your workstation ID. Both information will be provided you by the instructor. When done click **Create**  
+1. Enter **PROD\_CS\_\<LOC\>\_XX** for both the System ID and the System Name, replacing **\<LOC\>** with the location's acronym where you are attending the workshop (i.e. WDF for Walldorf) and **XX** with your workstation ID. Both information will be provided you by the instructor. When done click **Create**  
 	![](images/05.png)
 
 1. Enter
@@ -64,7 +64,7 @@ In the upcoming exercises you will learn how to retrieve and work with data usin
 	| Host Name | localhost |
 	| Logical System | LOCALHOST |
 	| UI Host Name | localhost |
-	| Business System | BP\_EXT\_SYSTEM\_\<LOC\>\_XX |
+	| Business System | PROD\_CS\_\<LOC\>\_XX |
 	
 	(remember to replace **\<LOC\>** with the location's acronym where you are attending the workshop (i.e. WDF for Walldorf) and **XX** with your workstation ID)
 	![](images/06.png)
@@ -79,8 +79,8 @@ In the upcoming exercises you will learn how to retrieve and work with data usin
 
 	| Parameter | Value |
 	| --------- | ----- |
-	| User Name | BP\_EXT\_CU\_\<LOC\>\_XX |
-	| Description | BP External Communication User \<LOC\> XX |
+	| User Name | PROD\_CU\_\<LOC\>\_XX |
+	| Description | Product Communication User \<LOC\> XX |
 	| Password | A password with at least 20 chars with a upper case char,numbers and a special character (i.e. "**Welcome2thisworkshop!**") |
 
 (where **\<LOC\>** with the location's acronym where you are attending the workshop and **XX** is your workstation ID)
@@ -118,16 +118,16 @@ The next step is to create a new Communication Arrangement.
 1. Browse for the existing scenarios  
 	![](images/17.png)
 
-1. Select the **SAP\_COM\_0008** scenario  
+1. Select the **SAP\_COM\_0009** scenario  
 	![](images/18.png)
 
-1. Enter **BP\_COMM\_ARR\_\<LOC\>\_XX** as Arrangement Name replacing **\<LOC\>** with the location's acronym where you are attending the workshop and **XX** with your workstation ID; then click **Create**  
+1. Enter **PROD\_CA\_\<LOC\>\_XX** as Arrangement Name replacing **\<LOC\>** with the location's acronym where you are attending the workshop and **XX** with your workstation ID; then click **Create**  
 	![](images/19.png)
 
 1. Browse for a Communication System    
 	![](images/20.png)
 
-1. Select the Communication System **BP\_EXT\_SYSTEM\_\<LOC\>\_XX** you created earlier where **\<LOC\>** with the location's acronym where you are attending the workshop and **XX** is your workstation ID
+1. Select the Communication System **PROD\_CS\_\<LOC\>\_XX** you created earlier where **\<LOC\>** with the location's acronym where you are attending the workshop and **XX** is your workstation ID
 	![](images/21.png)
 
 1. The correct information is loaded automatically. 
@@ -136,7 +136,7 @@ The next step is to create a new Communication Arrangement.
 1. Check that also the user name for the Outbound Communication is the correct one  
 	![](images/23.png)
 
-1. Expand the first outbound service **Replicate Customers from S/4 System to Client** and **deactivate** it
+1. Expand the first outbound service **Replicate Product from S/4 System to Client** and **deactivate** it
 	![](images/24.png)
 
 1. Do the same for all the other services  
@@ -145,7 +145,7 @@ The next step is to create a new Communication Arrangement.
 1. Once you have deactivated all the outbound services click on **Save** to confirm the creation of your communication arrangement  
 	![](images/26.png)
 
-1. If you scroll a little up this page, you can find a link for the **Business Partner Integration**: this will be the link which you need to use in the next exercises for retrieving Business Partners data. The credentials are the Communication User you have defined here. Write down this link with its credentials because you will need them in the upcoming exercises
+1. If you scroll a little up this page, you can find a link for the **Product Master - Create, Read, Update, Delete**: this will be the link which you need to use in the next exercises for retrieving Products data. The credentials are the Communication User you have defined here. Write down this link with its credentials because you will need them in the upcoming exercises
 	![](images/27.png)
 
 1. Click on the **Home** button to go back to the Home Page  
@@ -167,10 +167,8 @@ In order to test the service provided by your new Communication Arrangement you 
 	- enter your **Communication User** with its password
 	- click the **Send** button
 	
+	You should get a screen like this where the the Response Status is **200** and a the list of all the available collections is returned. You should be also able to read collection titles like **A_Product**. This means that your service is working fine  
 	![](images/30.png)
-
-1. You should get a screen like this where the the Response Status is **200** and a the list of all the available collections is returned. You should be also able to read collection titles like A_AddressEmailAddress and A_AddressFaxNumber. This means that your service is working fine  
-	![](images/31.png)
 
 1. Congratulations! You have successfully created and tested your Communication User, System and Arrangement.
 
