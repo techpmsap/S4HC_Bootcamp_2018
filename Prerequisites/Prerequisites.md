@@ -1,6 +1,7 @@
 <table width=100% border=>
+<tr><td colspan=2><img src="images/spacer.png"></td></tr>
 <tr><td colspan=2><h1>PREREQUISITES</h1></td></tr>
-<tr><td><h3>SAP Partner Workshop</h3></td><td><h1><img src="images/clock.png"> &nbsp;60 min</h1></td></tr>
+<tr><td><h3>SAP Partner Workshop</h3></td><td><h1><img src="images/clock.png"> &nbsp;30 min</h1></td></tr>
 </table>
 
 
@@ -172,7 +173,7 @@ For the workshop exercises you need to install the **Visual Studio Code** as you
 ### <a name="sign-up-neo"></a>Sign up for SAP Cloud Platform Neo trial account
 You need Neo trial SAP Cloud Platform to complete standalone hands-on exercise for Workflow Service and Business Rules Service. 
 
-1.	Sign up for SAP Cloud Platform trial account from <https://account.hanatrial.ondemand.com/> by clicking on the **Register** button. If you already have an account on the Trial landscape please login with that account  
+1.	Sign up for SAP Cloud Platform trial account from <https://cloudplatform.sap.com/> by clicking on the **Start your free trial** button. If you already have an account on the Trial landscape please login with that account  
 	![](images/15.png)
 
 1. After you have logged in, click on **Neo Trial**   
@@ -181,35 +182,29 @@ You need Neo trial SAP Cloud Platform to complete standalone hands-on exercise f
 1. This will take you to the **Overview** page of the SAP Cloud Platform Cockpit for the Neo stack  
 	![](images/17.png)
 
-1.	From SAP Cloud Platform Cockpit, click on **Services**. Enable the Portal service  	![](images/18.png)
-	 
-	> **NOTE**: Portal service must be enabled first.
-
-1.	At the same way enable these further services
-	- SAP Web IDE Full-Stack
-	- Workflow
-	- Business Rules  
-	![](images/19.png)
-	
+1.	From SAP Cloud Platform Cockpit, click on **Services**, search for the word "web" and enable the **SAP Web IDE Full-Stack** service  	![](images/18.png)
+	 	
         
+
+
 
 ### <a name="sign-up-cf"></a>Sign up for SAP Cloud Platform Cloud Foundry trial account
 Sign up also for SAP Cloud Platform Cloud Foundry trial account.
 
 1.	From SAP Cloud Platform Cockpit, click on **Cloud Foundry Trial**. This will bring you directly into your Cloud Foundry Trial subaccount  
-	![](images/20.png)
+	![](images/19.png)
 
 2. If you already have activated this kind of landscape in the past, consider that it might be expired since the validity is only **30 days**. All you have to do is to reactivate the trial by going on the first icon in the top toolbar and selecting **Extend Free Trial**. Then you have to refresh your browser. The button for extending free trial is only available after your trial plan is expired  
-	![](images/21.png)
+	![](images/20.png)
 
 1.	Select your trial sub-account  
+	![](images/21.png)	 
+
+1.	Click on **Spaces** on the left sidebar  
 	![](images/22.png)	 
 
-1.	You should have just one space. Click on it  
-	![](images/23.png)	 
-
-1.	Make sure you have **2GB Memory** for your space. If you don’t have 2GB Memory, please register a new account.  
-	![](images/24.png)
+1.	You should have just one space. Make sure you have **4GB Memory** for your space. If you don’t have 4GB Memory, please register a new account.  
+	![](images/23.png)
 
 
 
