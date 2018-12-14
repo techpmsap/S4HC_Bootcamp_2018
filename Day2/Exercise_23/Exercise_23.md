@@ -135,7 +135,7 @@ In this chapter you are going to see how create a new servlet to retrieve Produc
 1. Click on **File --> Save** to save the file  
 	![](images/07.png)
 
-1. We are ready to build the project to include this new servlet. On the right side, expand the **Maven Projects** section, select the *myneoproject* POM file (it will be opened automatically in the editor), right click on it and choose **Custom Goals...**  
+1. We are ready to build the project to include this new servlet. On the left side, expand the **Maven Projects** section, select the *myneoproject* POM file (it will be opened automatically in the editor), right click on it and choose **Custom Goals...**  
 	![](images/08.png)
 
 1. Type in "**clean install**" and hit **Enter**. We are building the project directly from the development environment and not from the Terminal as we have done earlier  
