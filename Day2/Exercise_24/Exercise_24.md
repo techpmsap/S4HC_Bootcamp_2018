@@ -1,7 +1,7 @@
 <table width=100% border=>
 <tr><td colspan=2><img src="images/spacer.png"></td></tr>
 <tr><td colspan=2><h1>EXERCISE 24 - Create service destinations on both SAP Cloud Platform Neo and Cloud Foundry environments</h1></td></tr>
-<tr><td><h3>ASUG PreConference 2018</h3></td><td><h1><img src="images/clock.png"> &nbsp;10 min</h1></td></tr>
+<tr><td><h3>SAP S/4HANA Cloud Bootcamp</h3></td><td><h1><img src="images/clock.png"> &nbsp;10 min</h1></td></tr>
 </table>
 
 
@@ -26,99 +26,110 @@ The goal of this document is to set up some required services for the next exerc
   
 Here below are prerequisites for this exercise.
 
+* You have completed exercise 2_3
 * An account on the SAP Cloud Platform: it will be provided by your instructor along with the required credentials
 * The destination file you can download [here](files/ErpQueryEndpoint_CF.zip). Extract it in a proper location on your disk
 
 
 ## Steps
 
-1. [Create the destination services on SAP CF and check the Neo environemnt](#bpr-destination)
-1. [Check the Neo environemnt](#neo-environment)
+1. [Adjust the destination in the Neo environment](#neo-destination)
+1. [Create the destination services on SAP CF](#cf-destination)
 
+### <a name="neo-destination"></a>Adjust the destination in the Neo environment
+In order to work with Application Programming Model and access the backend from SAP Web IDE we need to do a quick adjustment to the destination on Neo environment
 
-### <a name="bpr-destination"></a>Create the destination services on SAP CF and check the Neo environment
-In this chapter you are going to see how to create an instance of the destination service on SAP Cloud Foundry and how to import a destination file into it.
-
-1. Login to SAP Cloud Platform <https://account.hana.ondemand.com/cockpit#/globalaccount/8fd39023-a237-4d71-9b6a-ed9d1719d275/subaccount/1d4a4a5d-2ada-4584-9c6a-631cb5fa80f2/spaces> with the credentials provided by your instructor 
+1. Go to your SAP Cloud Platform Trial account <https://account.hanatrial.ondemand.com/cockpit> entering your credentials. Click on the **Neo Trial** environment  
 	![](images/01.png)
 
-1. You will find a SAP Cloud Foundry subaccount prepared for you with a space named **ASUGCF_DevXXX** where XXX is your workstation ID. Click on the **ASUGCF** link on the top of the page to go to the subaccount's details  
+1. Select **Connectivity -> Destinations** on the left hand side. You should see the **ErpQueryEndpoint** destination you already created in the exercise 2_3
 	![](images/02.png)
 
-1. Take note of the **API Endpoint** you find on the right side because it will be required in the next exercises when we will ask you to specify your SAP Cloud Foundry API Endpoint and click on the **Spaces** number, just above the API Endpoint    
+1. Select the **ErpQueryEndpoint** destination and click on **Edit** to put the destination in edit mode  
 	![](images/03.png)
 
-1. You are now into your space. It should be empty: if not, please feel free to delete any application you find  
+1. Add the following additional properties and click on **Save**
+	
+	| Property | Value |
+	| -------- | ----- |
+	| WebIDESystem | ErpQueryEndpoint |
+	| WebIDEEnabled | True |
+	| WebIDEUsage | odata_gen |
+	
 	![](images/04.png)
+
+1. This is how your destination should look like after the changes  
+	![](images/05.png)
+
+1. Click on **Home** to go to the home page of your cockpit
+	![](images/06.png)
+
+
+
+
+
+### <a name="cf-destination"></a>Create the destination services on SAP CF
+Let's create a destination to the S/4HANA Cloud back-end for Cloud Foundry as well.
+
+1. Click on the **Cloud Foundry Trial** environment of your Trial account 
+	![](images/07.png)
+
+1. Click on the **trial** subaccount
+	![](images/08.png)
+ 
+1. Take note of the **API Endpoint** you find on the right side because it will be required in the next exercises when we will ask you to specify your SAP Cloud Foundry API Endpoint; then click on **Spaces** in the left hand side toolbar    
+	![](images/09.png)
+
+1. Click on the **dev** space  
+	![](images/10.png)
+
+1. You are now into your space. It should be empty: if not, please delete any application you find since we require space for our exercise  
+	![](images/11.png)
 
 1. Click on the **Service Marketplace** and then on the **destination** tile to create an instance of the **destination** service  
 	![](images/12.png)
 
-1. Click on **Instances** and then on **New Instance**  
+1. Click on **Instances**  
 	![](images/13.png)
 
-1. Choose the **lite** plan and click **Next**  
+1. Click on **New Instance**  
 	![](images/14.png)
 
-1. Click **Next**  
+1. Choose the **lite** plan and click **Next**  
 	![](images/15.png)
 
-1. Don't select any application for the moment and click **Next** again  
+1. Click **Next**  
 	![](images/16.png)
 
-1. Enter **bpr_destination** as the instance name and click **Finish**  
+1. Don't select any application for the moment and click **Next** again  
 	![](images/17.png)
 
-1. Your **bpr_destination** instance has been successfully created. Click on the name of this instance  
+1. Enter **s4hc_destination** as the instance name and click **Finish**  
 	![](images/18.png)
 
-1. Select the **Destinations** tab on the left hand side and click on **Import Destination**  
+1. Your **s4hc_destination** instance has been successfully created. Click on the name of this instance  
 	![](images/19.png)
 
-1. Locate the file *ErpQueryEndpoint_CF* you extracted from the zip downloaded in the prerequisites to this exercise  
+1. Select the **Destinations** tab on the left hand side and click on **Import Destination**  
 	![](images/20.png)
 
-1. The file will be imported. Just enter the credentials provided by your instructor and click **Save**  
+1. Locate the file *ErpQueryEndpoint_CF* you extracted from the zip downloaded in the prerequisites to this exercise and import it  
 	![](images/21.png)
 
-1. After saving, you can check the new destination by clicking on the button **Check Connection**  
+1. Before clicking on **Save**, replace the existing URL and the credentials with the one you created in exercise 2_2  
 	![](images/22.png)
 
-1. You should get the message **Connection to "ErpQueryEndpoint"" established. Response returned: "302: Redirect"**. Click on **Close**  
+1. After saving, you can check the new destination by clicking on the button **Check Connection**  
 	![](images/23.png)
 
-
-### <a name="neo-environment"></a>Check the Neo environemnt
-Let's gie a look now to the NEO environment and let's check that everything is in place.
-
-1. Click on this link <https://account.hana.ondemand.com/cockpit> and enter the credentials for the NEO environment provided by your instructor
+1. You should get the message **Connection to "ErpQueryEndpoint"" established. Response returned: "302: Redirect"**. Click on **Close**  
 	![](images/24.png)
 
-1. Just click on **Confirm** in case you receive this kind of message  
-	![](images/24_2.png)
-
-1. Click on the **TechEd2018** Global Account  
-	![](images/24_3.png)
-
-1. Click on the **ASUG** subaccount  
-	![](images/24_4.png)
-
-1. **[Read and Check Only]** Select **Connectivity -> Destinations** on the left hand side and just make sure that the **ErpQueryEndpoint** destination is correctly in place. Here we have already imported this destination since all the users will share it in the next exercises
-	![](images/26.png)
-
-1. Click on **Services**, enter the text "**web**" in the search box, and click on the **SAP Web IDE Full-Stack** tile  
-	![](images/27.png)
-
-1. Click on **Go to Service**  
-	![](images/28.png)
-
-1. The **SAP Web IDE** tools is launched. Please bookmark this URL becaue it will be used in the next exercises  
-	![](images/29.png)
 
 1. Congratulations! You have successfully completed this exercise.
 
 
 
 ## Summary
-This concludes the exercise. You should have learned how to create a Destination service instance in SAP Cloud Foundry. Please proceed with the [next exercise](../Exercise2/Exercise2.md).
+This concludes the exercise. You should have learned how to create a Destination service instance in SAP Cloud Foundry. Please proceed with the next exercise.
  
