@@ -201,10 +201,10 @@ This is an optional step for this exercise. You can try to deploy this applicati
 1. The application's overview page appears. Click on the application's URL  
 	![](images/20.png)
 
-1. The Tomcat webserver installed together with your app is working fine  
+1. The Tomcat webserver installed together with your app is working fine. Click on the **HelloWorldServlet** link  
 	![](images/21.png)
 
-1. By specifying, at the end of the URL the **/hello** endpoint you will get the Hello World message  
+1. This will bring you to the page containing the Hello World message  
 	![](images/22.png)
 
 
