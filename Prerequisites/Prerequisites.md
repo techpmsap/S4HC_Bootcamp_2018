@@ -99,7 +99,7 @@ You are ready to test if you can build and run a Java Web application project wi
 1. Go inside this folder in the Terminal and run the following command
 
 	```sh
-	mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.3
+	mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-webapp -DarchetypeVersion=1.4
 	```
 	![](images/02.png)
 
@@ -117,19 +117,23 @@ You are ready to test if you can build and run a Java Web application project wi
 
 	![](images/04.png)
 
-1. At the end of the process you should see the **BUILD SUCCESS** message as shown in the picture. Go inside the *TestMaven* folder and run the command
+1. At the end of the process you should see the **BUILD SUCCESS** message as shown in the picture. 
+
+	![](images/05.png)
+
+1. Go inside the *TestMaven* folder and run the command
 
 	```
 	mvn clean install
 	```
 	This command will trigger the cleaning of the *target* folder and the building of the test application  
-	![](images/05.png)
-
-1. When the process finishes you should have again a **BUILD SUCCESS** message: this means that this sample application has been built successfully  
 	![](images/06.png)
 
-1. You can also check that the application named *TestMaven.war* is correctly available in the target folder  
+1. When the process finishes you should have again a **BUILD SUCCESS** message: this means that this sample application has been built successfully  
 	![](images/07.png)
+
+1. You can also check that the application named *TestMaven.war* is correctly available in the target folder  
+	![](images/08.png)
 
 
 
@@ -138,7 +142,7 @@ You are ready to test if you can build and run a Java Web application project wi
 For the workshop exercises you need to install the **Postman** application. It will allow you to send REST requests to backend systems. You can open the following link to install it:
 
 1. Download Postman from [here](https://www.getpostman.com) and install it  
-	![](images/08.png)
+	![](images/09.png)
 
 
 
@@ -147,22 +151,22 @@ For the workshop exercises you need to install the **Postman** application. It w
 For the workshop exercises you need to install the **Visual Studio Code** as your development environment. You can open the following link to install it:
 
 1. Download Visual Studio Code from [here](https://code.visualstudio.com) and install it  
-	![](images/09.png)
-
-1. Click on **Open folder...**  
 	![](images/10.png)
 
-1. Browse for the folder of the **TestMaven** project you created earlier using Maven  
+1. Click on **Open folder...**  
 	![](images/11.png)
 
-1. Locate the *App.java* in the Explorer and if you get the propt to install the Java extension, install it
+1. Browse for the folder of the **TestMaven** project you created earlier using Maven  
 	![](images/12.png)
 
-1. After the installation of the Java Extension Pack and the Maven for Java extensions, click on one of the **Reload** buttons to reload your IDE
+1. Locate the *App.java* in the Explorer and if you get the propt to install the Java extension, install it
 	![](images/13.png)
 
-1. After it's reloaded simply close the current folder from the **File** menu
+1. After the installation of the Java Extension Pack and the Maven for Java extensions, click on one of the **Reload** buttons to reload your IDE
 	![](images/14.png)
+
+1. After it's reloaded simply close the current folder from the **File** menu
+	![](images/15.png)
 
 1. Your Visual Studio Code is correctly installed and you have also equipped it with the Java Extension pack.
 
@@ -174,15 +178,15 @@ For the workshop exercises you need to install the **Visual Studio Code** as you
 You need Neo trial SAP Cloud Platform to complete standalone hands-on exercise for Workflow Service and Business Rules Service. 
 
 1.	Sign up for SAP Cloud Platform trial account from <https://cloudplatform.sap.com/> by clicking on the **Start your free trial** button. If you already have an account on the Trial landscape please login with that account  
-	![](images/15.png)
-
-1. After you have logged in, click on **Neo Trial**   
 	![](images/16.png)
 
-1. This will take you to the **Overview** page of the SAP Cloud Platform Cockpit for the Neo stack  
+1. After you have logged in, click on **Neo Trial**   
 	![](images/17.png)
 
-1.	From SAP Cloud Platform Cockpit, click on **Services**, search for the word "web" and enable the **SAP Web IDE Full-Stack** service  	![](images/18.png)
+1. This will take you to the **Overview** page of the SAP Cloud Platform Cockpit for the Neo stack  
+	![](images/18.png)
+
+1.	From SAP Cloud Platform Cockpit, click on **Services**, search for the word "web" and enable the **SAP Web IDE Full-Stack** service  	![](images/19.png)
 	 	
         
 
@@ -192,19 +196,19 @@ You need Neo trial SAP Cloud Platform to complete standalone hands-on exercise f
 Sign up also for SAP Cloud Platform Cloud Foundry trial account.
 
 1.	From SAP Cloud Platform Cockpit, click on **Cloud Foundry Trial**. This will bring you directly into your Cloud Foundry Trial subaccount  
-	![](images/19.png)
-
-2. If you already have activated this kind of landscape in the past, consider that it might be expired since the validity is only **30 days**. All you have to do is to reactivate the trial by going on the first icon in the top toolbar and selecting **Extend Free Trial**. Then you have to refresh your browser. The button for extending free trial is only available after your trial plan is expired  
 	![](images/20.png)
 
-1.	Select your trial sub-account  
-	![](images/21.png)	 
+2. If you already have activated this kind of landscape in the past, consider that it might be expired since the validity is only **30 days**. All you have to do is to reactivate the trial by going on the first icon in the top toolbar and selecting **Extend Free Trial**. Then you have to refresh your browser. The button for extending free trial is only available after your trial plan is expired  
+	![](images/21.png)
 
-1.	Click on **Spaces** on the left sidebar  
+1.	Select your trial sub-account  
 	![](images/22.png)	 
 
+1.	Click on **Spaces** on the left sidebar  
+	![](images/23.png)	 
+
 1.	You should have just one space. Make sure you have **4GB Memory** for your space. If you don’t have 4GB Memory, please register a new account.  
-	![](images/23.png)
+	![](images/24.png)
 
 
 
