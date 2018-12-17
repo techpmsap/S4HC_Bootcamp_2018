@@ -1,7 +1,7 @@
 <table width=100% border=>
 <tr><td colspan=2><img src="images/spacer.png"></td></tr>
 <tr><td colspan=2><h1>EXERCISE 26 - Enable the front-end application in S/4HANA Cloud Launchpad</h1></td></tr>
-<tr><td><h3>ASUG PreConference 2018</h3></td><td><h1><img src="images/clock.png"> &nbsp;20 min</h1></td></tr>
+<tr><td><h3>SAP S/4HANA Cloud Bootcamp</h3></td><td><h1><img src="images/clock.png"> &nbsp;20 min</h1></td></tr>
 </table>
 
 
@@ -41,10 +41,10 @@ Here below are prerequisites for this exercise.
 What we want to do here is to get rid of the Fiori Launchpad appearing wen we start our Cloud Foundry application we built in the previous exercise, so that it can be run directly. 
 	![](images/01.png)
 
-1. Login to the SAP Web IDE Full-Stack through the link <https://webidecp-ovb9vknezv.dispatcher.hana.ondemand.com/> with the credentials provided by your instructor  
+1. Login to the SAP Web IDE Full-Stack with your credentials  
 	![](images/02.png)
 
-1. Right click on the *webapp* folder located under the path *bpr\_bam\_XXX/frontend\_XXX* (where **XXX** is your workstation ID) and select **New -> File**  
+1. Right click on the *webapp* folder located under the path *prod\_bam\_XXX/frontend\_XXX* (where **XXX** is your workstation ID) and select **New -> File**  
 	![](images/03.png)
 
 1. Create a new file named *index.html*  
@@ -113,7 +113,7 @@ What we want to do here is to get rid of the Fiori Launchpad appearing wen we st
 1. After a while you should receive a message informing you that the build process is completed  
 	![](images/08.png)
 
-1. Locate the *bpr\_bam\_XXX\_0.0.1.mtar* file in the *mta\_archives* directory, right click on it and do **Deploy -> Deploy to SAP Cloud Platform**  
+1. Locate the *prod\_bam\_XXX\_0.0.1.mtar* file in the *mta\_archives* directory, right click on it and do **Deploy -> Deploy to SAP Cloud Platform**  
 	![](images/09.png)
 
 1. Choose the right Cloud Foundry API Endpoint, enter its credentials and click on **Deploy**  
@@ -128,7 +128,7 @@ What we want to do here is to get rid of the Fiori Launchpad appearing wen we st
 1. You can see that the application is now started directly without using the Fiori Launchpad. You can click on **Go** to get some data  
 	![](images/13.png)
 
-1.  You get your Business Partners
+1.  You get your Product list
 	![](images/14.png)
 
 1. Before moving to the next chapter, please write down the application URL you see in the browser: this will be required later  
@@ -140,10 +140,10 @@ What we want to do here is to get rid of the Fiori Launchpad appearing wen we st
 ### <a name="create-tile"></a>Create a new tile in the S/4HANA Cloud launchpad
 Now that our application can be ran without the Launchpad, let's create a tile for it in the S/4HANA Home page.
 
-1. Logon to the S/4HANA system <https://my300405.s4hana.ondemand.com/> using the credentials provided by your instructor  
+1. Logon to the S/4HANA system provided by your instructor along with its credentials  
 	![](images/16.png)
 
-1. Click on the **Extensibility** tab  
+1. From the drop down list on the right, select **Extensibility**  
 	![](images/17.png)
 
 1. Click on **Custom Tiles**  
@@ -152,13 +152,13 @@ Now that our application can be ran without the Launchpad, let's create a tile f
 1. Click on **New** to create a new tile  
 	![](images/19.png)
 
-1. Enter **ASUG BP XXX** for the Title, where **XXX** must be replaced by your workstation ID, and click **Create**  
+1. Enter **PRODUCT\_LIST\_LOC\_XXX** for the Title, where **LOC** must be replaced by your location (i.e. WDF for Walldorf) and  **XXX** by your workstation ID; then click **Create**  
 	![](images/20.png)
 
-1. Enter **Business Partners** for the Subtitle and the URL you wrote down in the previous chapter as URL: then click on drop down list to choose an icon  
+1. Enter **Product List** for the Subtitle and the URL you wrote down in the previous chapter as URL: then click on drop down list to choose an icon  
 	![](images/21.png)
 
-1. Search for "customer" and choose one of the icons proposed: i.e **customer-and-supplier**  
+1. Search for "product" and choose one of the icons proposed: i.e **product**  
 	![](images/22.png)
 
 1. Check that your tile looks like this and click **Save**  
@@ -170,7 +170,7 @@ Now that our application can be ran without the Launchpad, let's create a tile f
 1. Click on **Add**  
 	![](images/25.png)
 
-1. Search for "extensibility" and choose the **Extensibility - SAP_CORE_BC_EXT** catalog. Click on **OK**  
+1. Search for "extensibility" and choose the **Extensibility - SAP\_CORE\_BC\_EXT** catalog. Click on **OK**  
 	![](images/26.png)
 
 1. Select the **Extensibility** catalog and click **Publish**
@@ -194,15 +194,11 @@ Now that our application can be ran without the Launchpad, let's create a tile f
 1. You should find the new tile in the **Extensibility** catalog. Click on this tile  
 	![](images/33.png)
 
-1. Select the right identity provider  
-	![](images/34.png)
-
 1. The application should open successfully
-	![](images/35.png)
+	![](images/34.png)
 
 1. Congratulations! You have successfully completed this exercise.
 
 
 ## Summary
 This concludes the exercise. You should have learned how to adapt the application we built in the previous exercise to be ran without the Launchpad and how to create a new tile for it in the S/4HANA Cloud launchpad.
-Back to the [exercise index page](../../README.md)
