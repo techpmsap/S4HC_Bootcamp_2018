@@ -1,138 +1,152 @@
 <table width=100% border=>
-<tr><td colspan=2><h1>EXERCISE 11 - CREATE A CUSTOM BUSINESS OBJECT</h1></td></tr>
-<tr><td><h3>SAP S/4HANA Cloud Bootcamp</h3></td><td><h1><img src="images/clock.png"> &nbsp;15 min</h1></td></tr>
+<tr><td colspan=2><img src="images/spacer.png"></td></tr>
+<tr><td colspan=2><h1>EXERCISE 1_1 - Create service destinations on both SAP Cloud Platform Neo and Cloud Foundry environments</h1></td></tr>
+<tr><td><h3>SAP S/4HANA Cloud Bootcamp</h3></td><td><h1><img src="images/clock.png"> &nbsp;10 min</h1></td></tr>
 </table>
 
 
 ## Description
-In this exercise, you’ll learn how 
+In this exercise, you’ll learn how to 
 
-* to create a custom business object that has a simple data structure and publish it
-* to define the data structure and create the database persistence of a custom business object
-
-
-For further reading on S/4HANA cloud in-app extension, click link below.
-<https://jam4.sapjam.com/groups/m8lprEZwfU3zPoX0myj1Xu/overview_page/RfBJ6ix9q00bbSseaxm4zW>
+* access SAP Cloud Platform NEO and Cloud Foundry environments
+* create a Destination service instance in SAP Cloud Foundry and import the required destination 
 
 
 ## Target group
 
 * Developers
-* People interested in learning about S/4HANA Cloud extension and SDK  
+* People interested in learning the SAP Cloud Platform Application Programming Model  
 
 
 ## Goal
 
-The goal of this exercise is to create a custom business object.
-
+The goal of this document is to set up some required services for the next exercises.  
 
 ## Prerequisites
   
-Below are the prerequisites for this exercise.
+Here below are prerequisites for this exercise.
 
-* Google Chrome: Please complete this exercise using the Google Chrome browser
-* **Authorizations:** Your user needs a business role with business catalog **Extensibility** (ID: `SAP_CORE_BC_EXT`)
+* An account on the SAP Cloud Platform: it will be provided by your instructor along with the required credentials
+* The destination file you can download [here](files/ErpQueryEndpoint_CF.zip). Extract it in a proper location on your disk
 
 
 ## Steps
 
-1. [Starting Custom Business Objects application](#starting-custom-business-objects-application)
-1. [Creating a new Custom Business Object](#creating-a-new-custom-business-object)
-1. [Defining the data structure](#defining-the-data-structure)
-1. [Adding standard data to the structure](#Adding-standard-data-to-the-structure)
-1. [Creating the database persistence](#creating-the-database-persistence)
+1. [Adjust the destination in the Neo environment](#neo-destination)
+1. [Create the destination services on SAP CF](#cf-destination)
 
+### <a name="neo-destination"></a>Adjust the destination in the Neo environment
+In order to work with Application Programming Model and access the backend from SAP Web IDE we need to do a quick adjustment to the destination on Neo environment
 
+1. Go to your SAP Cloud Platform Trial account <https://account.hanatrial.ondemand.com/cockpit> entering your credentials. Click on the **Neo Trial** environment  
+	![](images/01.png)
 
-### <a name="starting-custom-business-objects-application"></a> Starting Custom Business Objects application
+1. Expand **Connectivity -> Destinations** and click on **New Destination**  
+	![](images/02.png)
 
-A several tutorials spanning example will show extensibility along custom Bonus Management applications.
-As applications are based on business objects, it all starts with custom business object creation.
+1. Enter the following values:
 
-In the first part, a Manager wants to define business objects "Bonus Plan" for employees. A Bonus Plan is there to save employee specific rules for bonus entitlement.
-
-**Start** with checking the prerequisite role.
-
-1. Logon to the S/4HANA Cloud system.  The presenter will provide you the logon user and password.  The **XX** is the number that you have been assigned to use for the exercise. 
-	![](images/1.png)
+	| Parameter | Value |
+	| --------- | ----- |
+	| Name | ErpQueryEndpoint |
+	| Type | HTTP |
+	| Description | ErpQueryEndpoint |
+	| URL | \<S4HANA\_ENDPOINT\> |
+	| Proxy Type | Internet |
+	| Authentication | BasicAuthentication |
+	| User | \<S4HANA\_USERNAME\> |
+	| Password | \<S4HANA\_PASSWORD\> |
 	
-1. You will see applications for the catalog of Extensibility.  
-	![](images/2.png)
+	Add the following properties to the destination by click the **New Property** button. 
 
-### <a name="creating-a-new-custom-business-object"></a> Creating a new Custom Business Object
+	>Note: proxyHost and proxyPort properties are only required on the Neo Trial so that it can reach the S/4HANA Cloud data center.
 
-1. **Create** the Custom Business Object's application by clicking its tile 
-
-	![](images/3.png)
+	| Property | Value |
+	| --------- | ----- |
+	| proxyHost | proxy-trial.od.sap.biz |
+	| proxyPort | 8080 |
+	| WebIDESystem | ErpQueryEndpoint |
+	| WebIDEEnabled | True |
+	| WebIDEUsage | odata_gen |
 	
-1. Press the **New** action to start creation of a Custom Business Object  
-
-	![](images/4.png)
+	At the end save the destination 
+	![](images/04.png)
 	
-1. In the opening pop Up **fill** in the Name "Bonus PlanXX". The other editable fields will get proposals automatically but can be changed.  
+1. You can also check that the destination is working by clicking on the **Check Connection** button  
+	![](images/05.png)
 
-	![](images/5.png) 
-	
-1. Execute the **Create** action.
+1. The response should be "302: Redirect". Click on **Close**  
+	![](images/05a.png)
 
-### <a name="defining-the-data-structure"></a> Defining the data structure
+1. Click on **Home** to go to the home page of your cockpit
+	![](images/06.png)
 
-1. In the following view for editing the custom business object, click on **Fields** tab of the "Bonus PlanXX".  
 
-	![](images/6.png) 
-	
-1. Click on **New** to create new field for the object. 
 
-	![](images/7.png) 
-	
-1. Enter "ID" for the "Label". Choose "Text" for the Type. Keep 20 for the Length. Check the Key checkbox. 
 
-	![](images/8.png)
-	
-1. Repeat the above 2 steps to **create** following fields by clicking on **New** for each field.
 
-	| Field Name (Label)     | Field Properties             | Tooltip     |
-	| :------------- | :--------------------------- | :-----------|
-	| ID             | Text of length 20, **key field** |Note: You have created ID on previous step.|   
-	| Validity Start Date | Date    | |
-	| Validity End Date | Date | |   
-	| Target Amount | Amount with Currency | |   
-	| Low Bonus Assignment Factor | Number of length 4, decimals 2 | Actual revenue must meet target more than that many times |
-	| High Bonus Assignment Factor | Number of length 4, decimals 2 | Actual revenue must meet target more than that many times |
-	| Low Bonus Percentage | Quantity with Unit | |   
-	| High Bonus Percentage | Quantity with Unit  | |
-	| Is Consistent | Checkbox, **Read Only**  | |
-	| Employee ID | Text of length 12  | |
-	| Employee Name | Text of length 40, **Read Only**   | |
+### <a name="cf-destination"></a>Create the destination services on SAP CF
+Let's create a destination to the S/4HANA Cloud back-end for Cloud Foundry as well.
 
-1. The UI for maintaining fields looks as follows. 
+1. Click on the **Cloud Foundry Trial** environment of your Trial account 
+	![](images/07.png)
 
-	![](images/10.png) 
+1. Click on the **trial** subaccount
+	![](images/08.png)
+ 
+1. Take note of the **API Endpoint** you find on the right side because it will be required in the next exercises when we will ask you to specify your SAP Cloud Foundry API Endpoint; then click on **Spaces** in the left hand side toolbar    
+	![](images/09.png)
 
-### <a name="Adding-standard-data-to-the-structure"></a> Adding standard data to the structure
+1. Click on the **dev** space  
+	![](images/10.png)
 
-1. Back in the business Object's **General Information** tab, **check** the **System Administrative Data** box to add standardized fields for `Created On`, `Created By`, `Last Changed On` and `Last Changed By`.  
-
+1. You are now into your space. It should be empty: if not, please delete any application you find since we require space for our exercise  
 	![](images/11.png)
-	
-	By checking this box the four fields also appear as uneditable in the field list.  These fields will be filled and updated automatically, so that you do not need to implement logic for this. Logic implementations for these fields even would be ignored.
-	
+
+1. Click on the **Service Marketplace** and then on the **destination** tile to create an instance of the **destination** service  
 	![](images/12.png)
 
-### <a name="creating-the-database-persistence"></a> Creating the database persistence
-
-1. **Publish** the Business Object `Bonus PlanXX`.  
-
+1. Click on **Instances**  
 	![](images/13.png)
-	
-	This creates the database persistence of the Business Object.
-	
-1. You will see **Published** in green for this object when the publishing is completed. 
 
+1. Click on **New Instance**  
 	![](images/14.png)
+
+1. Choose the **lite** plan and click **Next**  
+	![](images/15.png)
+
+1. Click **Next**  
+	![](images/16.png)
+
+1. Don't select any application for the moment and click **Next** again  
+	![](images/17.png)
+
+1. Enter **s4hc_destination** as the instance name and click **Finish**  
+	![](images/18.png)
+
+1. Your **s4hc_destination** instance has been successfully created. Click on the name of this instance  
+	![](images/19.png)
+
+1. Select the **Destinations** tab on the left hand side and click on **Import Destination**  
+	![](images/20.png)
+
+1. Locate the file *ErpQueryEndpoint_CF* you extracted from the zip downloaded in the prerequisites to this exercise and import it  
+	![](images/21.png)
+
+1. Before clicking on **Save**, replace the existing URL and the credentials with the one you created in exercise 2_2  
+	![](images/22.png)
+
+1. After saving, you can check the new destination by clicking on the button **Check Connection**  
+	![](images/23.png)
+
+1. You should get the message **Connection to "ErpQueryEndpoint"" established. Response returned: "302: Redirect"**. Click on **Close**  
+	![](images/24.png)
+
+
+1. Congratulations! You have successfully completed this exercise.
+
 
 
 ## Summary
-This concludes the exercise. You should have learned how to create a custom business object that has a simple data structure and publish it. At the end, there will be a database table for the business object. 
-
-Please proceed with next exercise.
+This concludes the exercise. You should have learned how to create a Destination service instance in SAP Cloud Foundry. Please proceed with the next exercise.
+ 

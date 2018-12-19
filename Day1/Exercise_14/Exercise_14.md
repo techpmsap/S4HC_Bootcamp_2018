@@ -1,5 +1,5 @@
 <table width=100% border=>
-<tr><td colspan=2><h1>EXERCISE 14 - ADAPTING THE UI OF A BUSINESS OBJECT</h1></td></tr>
+<tr><td colspan=2><h1>EXERCISE 1_4 - CREATE A UI FOR A CUSTOM BUSINESS OBJECT</h1></td></tr>
 <tr><td><h3>SAP S/4HANA Cloud Bootcamp</h3></td><td><h1><img src="images/clock.png"> &nbsp;15 min</h1></td></tr>
 </table>
 
@@ -7,9 +7,7 @@
 ## Description
 In this exercise, you’ll learn how 
 
-* to create a custom business object that has a simple data structure and publish it
-* to define the data structure and create the database persistence of a custom business object
-
+* to create an own application based on a Custom Business Object and a Custom Catalog Extension
 
 For further reading on S/4HANA cloud in-app extension, click link below.
 <https://jam4.sapjam.com/groups/m8lprEZwfU3zPoX0myj1Xu/overview_page/RfBJ6ix9q00bbSseaxm4zW>
@@ -23,7 +21,7 @@ For further reading on S/4HANA cloud in-app extension, click link below.
 
 ## Goal
 
-The goal of this exercise is to adapt the generated UI of a custom business object.
+The goal of this exercise is to create UI for a custom business object.
 
 
 ## Prerequisites
@@ -33,101 +31,111 @@ Below are the prerequisites for this exercise.
 * Google Chrome: Please complete this exercise using the Google Chrome browser
 * **Authorizations:** Your user needs a business role with business catalog **Extensibility** (ID: `SAP_CORE_BC_EXT`)
 
+
 ## Steps
 
-1. [Open the UI to be adapted](#open-the-ui-to-be-adapted)
-1. [Switch to Adaptation mode](#switch-to-adaptation-mode)
-1. [Create an UI group](#create-an-ui-group)
-1. [Move UI elements](#move-ui-elements)
-1. [Apply UI changes](#apply-ui-changes)
+1. [Start Editing Custom Business Object Bonus Plan](#start-editing-custom-business-object)
+1. [Generate UI](#generate-ui)
+1. [Expose UI as Application](#expose-ui-as-application)
+1. [Open Bonus Plan application](#open-bonus-plan-application)
+1. [Test Bonus Plan application](#test-bonus-plan-application)
 
-
-### <a name="open-the-ui-to-be-adapted"></a> Open the UI to be adapted
+### <a name="start-editing-custom-business-object"></a> Start Editing Custom Business Object Bonus Plan
 
 A several tutorials spanning example will show extensibility along custom Bonus Management applications.
 
-In the first parts a Manager wants to define business objects "Bonus Plan" for employees. 
+In the first parts a Manager wants to define business objects "Bonus Plan" for employees. A Bonus Plan is there to save employee specific rules for bonus entitlement.
 
-1. Open the **Bonus PlansXX** application in Fiori Launchpad group **Extensibility**.  XX is the number assigned to you for the exercise.
+1. From the Home page, click on the **Custom Business Objects** application tile 
 
-	![](images/1.png)
+	![](images/01.png)
 	
-1. Press **Go** to get the list of all Bonus Plans. **Open** a bonus plan's detail view.
-
-	![](images/2.png)
-
-	This is the screen that will be adapted.
+1. Search for **PlanXX** and open your Custom Business Object you created earlier by clicking on it in the list. Note: XX is your workstation ID  
+	![](images/02.png)
 	
-	![](images/3.png)
+1. To be able to do changes to the published version of the business object, you need to start edit mode by executing the **Edit Draft** action  
+	![](images/03.png)
+ 
+ 
+ 
+ 
 
-### <a name="switch-to-adaptation-mode"></a> Switch to Adaptation mode
+### <a name="generate-ui"></a> Generate UI
 
-1. **Open User Settings** via the corresponding application's menu action
-
-	![](images/4.png)
-
-	Open the adaptation mode via **Adapt UI**.
+1. Check the two boxes for **UI Generation** and **Service Generation** and **Publish** the business object to trigger the generation of UI (Master and Detail) and OData Service  
+	![](images/04.png)
 	
-	![](images/5.png)  
 
-### <a name="create-an-ui-group"></a> Create an UI group
 
-1. Editable UI elements can be recognized by getting a dashed border and the movement cursor when hovering over them.
 
-	![](images/6.png)
+### <a name="expose-ui-as-application"></a> Expose UI as Application
 
-1. By right clicking onto them, you get options to adapt the UI. As these options are partly type dependent you might need to find the right element first to get the option you need.
+In order to make the UI available as SAP Fiori Launchpad application, you have to assign the object to a Business Catalog which corresponds to a group in Launchpad. 
 
-1. **Hover** over the **General Information** area until it gets the dashed border and open the context menu via **Right Click**.
-
-	![](images/7.png)
+1. From the Business Object's general information, go to Custom Catalog Extension application by clicking the **Maintain Catalogs** action    
+	![](images/05.png)
 	
-1. **Create Group** and name it "Bonus Data". 
-
-	![](images/8.png) 
-
-### <a name="move-ui-elements"></a> Move UI elements
-
-1. Editable fields can simply be dragged and dropped as well. **Drag** the Validity Start Date field.
-
-	![](images/9.png)
-
-1. **Drop** it to the Bonus Data group.
-
+1. A new tab of window for "Custom Catalog Extensions" will open. Start adding a catalog with the **Add** action  
+	![](images/06.png)
+	
+1. Search for "Extensibility", select the Catalog with role ID **SAP_CORE_BC_EXT** and press **OK**  
+	![](images/07.png)
+	 
+1. Select the just added Catalog and **Publish** it  
+	![](images/08.png)
+	
+1. Click **OK** for the Confirmation  
+	![](images/09.png)
+	
+1. The publishing takes some minutes (5 to 15 minutes). The screen refreshes automatically once the status switches from unpublished to published. You can close this application's window and proceed  
 	![](images/10.png) 
 
-	Repeat **Drag & Drop** into Bonus Data group for the fields:
 
-	- Validity End Date
-	- Target Amount
-	- Low Bonus Assignment Factor
-	- High Bonus Assignment Factor
-	- Low Bonus Percentage
-	- High Bonus Percentage
-	- Employee ID
-	- Employee Name
 
-	![](images/11.png)
 
-### <a name="apply-ui-changes"></a> Apply UI changes
+### <a name="open-bonus-plan-application"></a> Open Bonus Plan application
 
-1. **Publish** the UI adaptations.
+1. Back in the Custom Business Object application's window, go to the SAP Fiori Launchpad via **Home** action.
 
+	![](images/11.png)  
+	
+1. Refresh the Browser window with key **`F5`** for that the catalog extension becomes visible. Now there is the Bonus PlanXX application's tile in the **Extensibility** group
+
+1. **Start** the application by clicking the tile  
 	![](images/12.png)
 
-1. Finally you only need to **Save & Exit** adaptation mode to work with the new layout.
 
+
+
+### <a name="test-bonus-plan-application"></a> Test Bonus Plan application
+
+1. Create a new Bonus Plan by clicking the "**+**"  
 	![](images/13.png)
 	
-	![](images/14.png)
+1. Enter the following data
 
+	| Field | Value | Note |
+	| :------------- | :--------------------|:-------------------- |
+	| ID | xxxxxxxxxxxxxxxxxx1 | Replace the xxxxxxxxxxxxxxxxxx with space.  There are 18 spaces before 1.  |
+	| Validity Start Date | 01/01/2018 |  |
+	| Validity End Date | 12/31/2018 |  |
+	| Target Amount | 1000.00 EUR |  |
+	| Low Bonus Assignment Factor | 1 |  |
+	| High Bonus Assignment Factor | 3 |  |
+	| Employee ID | CBXXXXXXXXXX |  |
+
+	>NOTE: Employee ID CBXXXXXXXXXX shall be the one of a sales person that created sales orders with a Net Amount of more than 3000.00 EUR in 2018 and that are completed. In this exercise, you can use **CB9980000008**  
+	![](images/14.png) 
+	
+1. **Save** the Bonus Plan. The UI will automatically return from Bonus Plan Detail to Master  
+
+1. You can see one entry in the list of bonus plans now  
+	![](images/15.png)
+	![](images/16.png)
+	
 ## Summary
-This concludes the exercise. 
 
-In the preceding tutorials, you created a custom business object with a simple data structure and its persistence. Then you generated an UI for this business object and exposed it as an Fiori Launchpad application.
-
+This concludes the exercise. In the preceding tutorials, you created a custom business object with a simple data structure and its persistence. Then, you generated an UI for this business object and exposed it as an Fiori Launchpad application.
 As the generated User Interfaces only list all fields of a business object node, adapting the UI might be necessary to improve usability of it.
-
-You should have learned how to adapt the generated UI of a custom business object. 
 
 Please proceed with next exercise.

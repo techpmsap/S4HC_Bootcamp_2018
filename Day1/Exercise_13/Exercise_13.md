@@ -1,14 +1,15 @@
 <table width=100% border=>
-<tr><td colspan=2><h1>EXERCISE 13 - IMPLEMENTING LOGICS FOR A CUSTOM BUSINESS OBJECT</h1></td></tr>
-<tr><td><h3>SAP S/4HANA Cloud Bootcamp</h3></td><td><h1><img src="images/clock.png"> &nbsp;30 min</h1></td></tr>
+<tr><td colspan=2><h1>EXERCISE 1_3 - CREATE A CUSTOM BUSINESS OBJECT</h1></td></tr>
+<tr><td><h3>SAP S/4HANA Cloud Bootcamp</h3></td><td><h1><img src="images/clock.png"> &nbsp;15 min</h1></td></tr>
 </table>
 
 
 ## Description
 In this exercise, you’ll learn how 
 
-* to implement logic to set some data from the backend only and to check all data of an instance.
-* to ease development and test already while doing it.
+* to create a custom business object that has a simple data structure and publish it
+* to define the data structure and create the database persistence of a custom business object
+
 
 For further reading on S/4HANA cloud in-app extension, click link below.
 <https://jam4.sapjam.com/groups/m8lprEZwfU3zPoX0myj1Xu/overview_page/RfBJ6ix9q00bbSseaxm4zW>
@@ -22,7 +23,7 @@ For further reading on S/4HANA cloud in-app extension, click link below.
 
 ## Goal
 
-The goal of this exercise is to implement custom business object logic to control your application.
+The goal of this exercise is to create a custom business object.
 
 
 ## Prerequisites
@@ -35,323 +36,103 @@ Below are the prerequisites for this exercise.
 
 ## Steps
 
-1. [Make key field Read-Only](#make-key-field-read-only)
-1. [Enable logic implementation](#enable-logic-implementation)
-1. [Start logic implementation](#start-logic-implementation)
-1. [Implement After Modification: fix values](#implement-after-modification-fix)
-1. [Implement After Modification: consistency check](#implement-after-modification-consistency)
-1. [Test the logic during development](#test-the-logic-during-development)
-1. [Implement Before Save](#implement-before-save)
-1. [Test via the UI](#test-via-the-UI)
+1. [Starting Custom Business Objects application](#starting-custom-business-objects-application)
+1. [Creating a new Custom Business Object](#creating-a-new-custom-business-object)
+1. [Defining the data structure](#defining-the-data-structure)
+1. [Adding standard data to the structure](#Adding-standard-data-to-the-structure)
+1. [Creating the database persistence](#creating-the-database-persistence)
 
-### <a name="make-key-field-read-only"></a> Make key field Read-Only
+
+
+### <a name="starting-custom-business-objects-application"></a> Starting Custom Business Objects application
 
 A several tutorials spanning example will show extensibility along custom Bonus Management applications.
+As applications are based on business objects, it all starts with custom business object creation.
 
-In the first parts a Manager wants to define business objects "Bonus Plan" for employees. A Bonus Plan is there to save employee specific rules for bonus entitlement.
+In the first part, a Manager wants to define business objects "Bonus Plan" for employees. A Bonus Plan is there to save employee specific rules for bonus entitlement.
 
-As there was no backend implementation to set the mandatory key field **`ID`** so far, we were forced to set it from the UI to be able to save instances.
-Now, as we will implement the logic to set the ID in backend and nowhere else, we will set that key field to Read-Only for the UI.
+**Start** with checking the prerequisite role.
 
-1. Open the business object **Bonus PlanXX** in **Custom Business Objects** application. 
-
-	![](images/1.png)
+1. Logon to the S/4HANA Cloud system.  The presenter will provide you the logon user and password.  The **XX** is the number that you have been assigned to use for the exercise. 
+	![](images/01.png)
 	
-1. Start Edit Mode by executing the **Edit Draft** action. 
+1. You will see applications for the catalog of Extensibility.  
+	![](images/02.png)
 
-	![](images/2.png) 
+### <a name="creating-a-new-custom-business-object"></a> Creating a new Custom Business Object
+
+1. **Create** the Custom Business Object's application by clicking its tile 
+
+	![](images/03.png)
 	
-1. Click on the **Fields** tab. **Check** the Read-Only box for key field **`ID`**.  
+1. Press the **New** action to start creation of a Custom Business Object  
 
-	![](images/4.png)
+	![](images/04.png)
 	
+1. In the opening pop Up **fill** in the Name "Bonus PlanXX". The other editable fields will get proposals automatically but can be changed.  
 
-### <a name="enable-logic-implementation"></a> Enable logic implementation
-
-1. Navigate to **General Information** tab. **Check** the box for **Determination and Validation**. **Publish** the business object definition.
-
-	![](images/6.png)
+	![](images/05.png) 
 	
-	Now you are enabled to implement **determination logic** which is called **after each modification** to a Bonus Plan instance from the UI, as well as **validation logic** which is called **before each save** of an instance.
+1. Execute the **Create** action.
 
-### <a name="start-logic-implementation"></a> Start logic implementation
+### <a name="defining-the-data-structure"></a> Defining the data structure
 
-For **published** Custom Business Objects **without a Draft version** you can implement logic.
+1. In the following view for editing the custom business object, click on **Fields** tab of the "Bonus PlanXX".  
 
-1. Navigate to the **Logic** tab.
-
-	![](images/7.png) 
+	![](images/06.png) 
 	
-1. Click on the **After Modification** Event Logic which is a Determination Logic.
+1. Click on **New** to create new field for the object. 
 
-	![](images/8.png)
+	![](images/07.png) 
 	
-1. In the logic view, you initially see the not editable empty published version. Click the **Create Draft** action.
+1. Enter "ID" for the "Label". Choose "Text" for the Type. Keep 20 for the Length. Check the Key checkbox. 
 
-	![](images/9.png)
+	![](images/08.png)
 	
-1. An editable copy of the published version appears on the left. With the **Draft Version** and **Published Version** actions you can decide what coding to see.
+1. Repeat the above 2 steps to **create** following fields by clicking on **New** for each field.
+
+	| Field Name (Label)     | Field Properties             | Tooltip     |
+	| :------------- | :--------------------------- | :-----------|
+	| ID             | Text of length 20, **key field** |Note: You have created ID on previous step.|   
+	| Validity Start Date | Date    | |
+	| Validity End Date | Date | |   
+	| Target Amount | Amount with Currency | |   
+	| Low Bonus Assignment Factor | Number of length 4, decimals 2 | Actual revenue must meet target more than that many times |
+	| High Bonus Assignment Factor | Number of length 4, decimals 2 | Actual revenue must meet target more than that many times |
+	| Low Bonus Percentage | Quantity with Unit | |   
+	| High Bonus Percentage | Quantity with Unit  | |
+	| Is Consistent | Checkbox, **Read Only**  | |
+	| Employee ID | Text of length 12  | |
+	| Employee Name | Text of length 40, **Read Only**   | |
+
+1. The UI for maintaining fields looks as follows. 
+
+	![](images/09.png) 
+
+### <a name="Adding-standard-data-to-the-structure"></a> Adding standard data to the structure
+
+1. Back in the business Object's **General Information** tab, **check** the **System Administrative Data** box to add standardized fields for `Created On`, `Created By`, `Last Changed On` and `Last Changed By`.  
 
 	![](images/10.png)
-
-### <a name="implement-after-modification-fix"></a> Implement After Modification: fix values
-
-Implement After Modification event with following fix value functionality:
-
-1. Set the key field `ID` if still initial.
-
-	>**Hint:** Changing Parameter `bonusplanXX` enables you to read current node data and change it. 
 	
-	>**Hint:** You can read existing Bonus Plan data via the CDS View that is named as the Business Object's Identifier (here: `YY1_BONUSPLANXX`). 
+	By checking this box the four fields also appear as uneditable in the field list.  These fields will be filled and updated automatically, so that you do not need to implement logic for this. Logic implementations for these fields even would be ignored.
 	
-	>**Hint:** With the key combination **CTRL + Space** you can access the very helpful code completion. 
-
 	![](images/11.png)
 
-	Note: Replace XX to the number assigned to you.
+### <a name="creating-the-database-persistence"></a> Creating the database persistence
 
-	```
-	* set ID
-	IF bonusplanXX-id IS INITIAL.
-	   SELECT MAX( id ) FROM yy1_bonusplanXX INTO @DATA(current_max_id).
-	   bonusplanXX-id = current_max_id + 1.
-	ENDIF.
-	```
-
-1. Set the Unit of Measure for the Bonus Percentages to `P1` which is the code for % (percent)
-
-	```
-	* set percentage unit
-	bonusplanXX-lowbonuspercentage_u = bonusplanXX-highbonuspercentage_u = 'P1'.
-	```
-
-1. Determine and set the Employee Name from the Employee ID
-	>**Hint:** Extensibility offers Helper class `CL_ABAP_CONTEXT_INFO` with method `GET_USER_FORMATTED_NAME` that needs a user ID to return its formatted name
-
-	```
-	* set Employee Name
-	IF bonusplanXX-employeeid IS NOT INITIAL.
-	   bonusplanXX-employeename = cl_abap_context_info=>get_user_formatted_name( bonusplanXX-employeeid ).
-	ENDIF.
-	```
-
-### <a name="implement-after-modification-consistency"></a> Implement After Modification: consistency check
-
-1. In dependence on following checks, set the `isconsistent` property.
-
-	- Check that `ValidityStartDate` and `ValidityEndDate` are set and that `ValidityStartDate` is earlier in time than `ValidityEndDate`.
-	- Check that Factors and Percentages are set correctly (all > 0, Percentages < 100, `LowBonusAssignmentFactor` < `HighBonusAssignmentFactor`)
-	- Check that Employee ID is set
-
-1. Enter the consistency check coding.
-	
-	```
-	* consistency check START
-	IF bonusplanXX-validitystartdate IS INITIAL
-	 OR bonusplanXX-validityenddate IS INITIAL
-	 OR bonusplanXX-validitystartdate GE bonusplanXX-validityenddate
-	 OR bonusplanXX-lowbonusassignmentfactor IS INITIAL
-	 OR bonusplanXX-highbonusassignmentfactor IS INITIAL
-	 OR bonusplanXX-lowbonuspercentage_v IS INITIAL
-	 OR bonusplanXX-highbonuspercentage_v IS INITIAL
-	 OR bonusplanXX-lowbonuspercentage_v GE 100
-	 OR bonusplanXX-highbonuspercentage_v GE 100
-	 OR bonusplanXX-lowbonusassignmentfactor GE bonusplanXX-highbonusassignmentfactor
-	 OR bonusplanXX-employeeid IS INITIAL
-	 OR bonusplanXX-targetamount_v IS INITIAL
-	 OR bonusplanXX-targetamount_c IS INITIAL.
-	    bonusplanXX-isconsistent = abap_false.
-	ELSE.
-	    bonusplanXX-isconsistent = abap_true.
-	ENDIF.
-	* consistency check END
-	```
-
-### <a name="test-the-logic-during-development"></a> Test the logic during development
-
-On top of the coding you can maintain runtime data for the current node structure which represents the data before running the test functionality. This data can also be saved as variant for later usages.
-
-1. Click the value help to add test data
+1. **Publish** the Business Object `Bonus PlanXX`.  
 
 	![](images/12.png)
-
-1. Enter following data
-
-	| Field	Name | Field Value |
-	|------------|-------------|
-	| validitystartdate | 2018-01-01 |
-	| validityenddate | 2018-12-31 |
-	| targetamount_v | 1000 |
-	| targetamount_c | EUR |
-	| lowbonusassignmentfactor | 1 |
-	| highbonusassignmentfactor | 3 |
-	| lowbonuspercentage_v | 10 |
-	| highbonuspercentage_v | 20 |
-	| employeeid | CBXXXXXXXXXX |
-
-	"employeeid" CBXXXXXXXXXX shall be the one of a sales person that created sales orders with a Net Amount of more than 3000.00 EUR in 2016 and that are completed. In this exercise, you can use CB9980000008. 
-
-	This will look as follows.
 	
+	This creates the database persistence of the Business Object.
+	
+1. You will see **Published** in green for this object when the publishing is completed. 
+
 	![](images/13.png)
-	
-	Click **OK**.
-	
-	![](images/14.png)
 
-1. Execute the **Test** action.
-   
-   ![](images/15.png) 
-
-1. You can see the node data after your logic was executed.
-
-	![](images/16.png)
-	
-	![](images/17.png)
-	
-	You can see that your logic works as "id", "percentage_u" fields and "employename" are filled and "isconsistent" is 'X'.
-	
-1. **Publish** the After Modification.
-
-	![](images/18.png)
-	
-1. Go back.
-
-	![](images/19.png)
-
-
-### <a name="implement-before-save"></a> Implement Before Save
-
-1. Click on **Before Save**.
-
-	![](images/20.png)
-	
-1. Click on **Create Draft**.
-
-	![](images/21.png)
-
-1. **Implement** Before Save event with following functionality
-
-	If the bonus plan is consistent, it can be continued to save. If it is not consistent, save will be rejected. In case of save no further processing is needed and logic can be ignored.
-	>**Hint:** Exporting parameter valid must be set to true for save and to false for rejection
-
-	```
-	* decide about save rejection
-	IF bonusplanXX-isconsistent EQ abap_true.
-   	 valid = abap_true.
-   	 RETURN.
-	ELSE.
-   	 valid = abap_false.
-	ENDIF.
-	```
-
-1. If the bonus plan is not consistent, write the first found error into the message and end the logic processing.
-These are the possible errors in detail:
-      - ValidityStartDate and ValidityEndDate must be set
-      - ValidityStartDate must be earlier in time than ValidityEndDate
-      - Factors and Percentages must be > 0
-      - Percentages must be < 100
-      - LowBonusAssignmentFactor must be < HighBonusAssignmentFactor
-      - Empoyee ID must be set
-
-	```
-	* consistency error message START
-	IF bonusplanXX-validitystartdate IS INITIAL OR bonusplanXX-validityenddate IS INITIAL.
-	    message = 'Validity Period must not be empty.'.
-	    RETURN.
-	ELSEIF bonusplanXX-validitystartdate GE bonusplanXX-validityenddate.
-	    CONCATENATE 'Validity End Date' bonusplanXX-validityenddate 'must be later than Validity Start Date' bonusplanXX-validitystartdate '!' INTO message SEPARATED BY space.
-	    RETURN.
-	ENDIF.
-	
-	IF bonusplanXX-targetamount_v IS INITIAL OR bonusplanXX-targetamount_v = 0.
-	    message = 'Target Amount must be over 0!'.
-	    RETURN.
-	ENDIF.
-	
-	IF bonusplanXX-targetamount_c IS INITIAL.
-	    message = 'Target Amount Currency must be set!'.
-	    RETURN.
-	ENDIF.
-	
-	IF bonusplanXX-lowbonusassignmentfactor IS INITIAL
-	 OR bonusplanXX-highbonusassignmentfactor IS INITIAL.
-	    message = 'Assignment Factors must be over 0!'.
-	    RETURN.
-	ENDIF.
-	
-	IF bonusplanXX-lowbonuspercentage_v IS INITIAL
-	 OR bonusplanXX-highbonuspercentage_v IS INITIAL.
-	    message = 'Percentages must be over 0!'.
-	    RETURN.
-	ENDIF.
-	
-	IF bonusplanXX-lowbonuspercentage_v GE 100
-	 OR bonusplanXX-highbonuspercentage_v GE 100.
-	    message = 'Percentage must be below 100!'.
-	    RETURN.
-	ENDIF.
-	
-	IF bonusplanXX-lowbonusassignmentfactor GE bonusplanXX-highbonusassignmentfactor.
-	    message = 'Low Bonus Factor must be smaller than High Bonus Factor!'.
-	    RETURN.
-	ENDIF.
-	
-	IF bonusplanXX-employeeid IS INITIAL.
-	    message = 'Employee ID must be set!'.
-	    RETURN.
-	ENDIF.
-	* consistency error message  END
-	```
-
-1. **Publish** the Before Save Logic.
-
-	![](images/22.png)
-	
-1. Go back and check both After Modication and Before Save are Published.
-
-	![](images/23.png)	
-1. Go home.
-
-	![](images/24.png)	
-	
-### <a name="test-via-the-UI"></a> Test via the UI
-
-Once ensured that both logic implementations were successfully published, you can start testing the application like an end user via the UI.
-
-1. **Open** the Bonus PlanXX application. 
-
-	![](images/25.png)
-	
-1. Click on Go. **Open** the Bonus Plan with ID `1`.
-
-	![](images/26.png)
-1. **Edit** this Bonus Plan.
-
-	![](images/27.png)
-1. **Enter** value `10` into field **Low Bonus Percentage**
-
-	![](images/28.png)
-1. **Save** the Bonus plan. Save fails due to the validation error messages for missing percentages.
-
-	![](images/29.png)
-	
-1. Close the Message.
-1. **Enter** value `20` into field **High Bonus Percentage**
-
-	![](images/30.png)
-1. **Save** the Bonus Plan. Now it will not be rejected. 
-
-	![](images/31.png)
-	
-1. You can see that your business logic works as the Percentage Units and the Employee Name get filled. Note: If you don't see the Employee Name, refresh the page and it will show.
-
-	![](images/32.png)
-	
 
 ## Summary
-This concludes the exercise. You should have learned how to implement logic to set some data from the backend and to check all data of an instance.
-
-You have also learned how to ease development and test already while doing it.
+This concludes the exercise. You should have learned how to create a custom business object that has a simple data structure and publish it. At the end, there will be a database table for the business object. 
 
 Please proceed with next exercise.
